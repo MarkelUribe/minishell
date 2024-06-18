@@ -1,0 +1,18 @@
+# Ignore object files
+*.o
+
+# Ignore static library files
+*.a
+
+# Ignore compiled executables
+*.exe
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+
+# Ignore VSCode specific files and folders
+.vscode/
+*.code-workspace

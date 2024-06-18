@@ -1,18 +1,19 @@
 NAME = minishell
 CC = gcc
+ODIR = src/obj
 LIBFT_LIB = src/libft/
 LIBFT_FLAGS = -L src/libft/ -lft
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -lreadline -L /opt/homebrew/opt/readline/lib
 RM		= rm -f
 
-SRC =	src/main.c \
+SRC =	src/main.c
 
-OBJS = $(SRC:%.c=%.o)
+OBJS = $(patsubst src/%.c,$(ODIR)/%.o,$(SRC))
 
 all: $(NAME)
 
-.c.o:
+$(ODIR)/%.o: src/%.c
 		$(CC) -I includes/. $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
