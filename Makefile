@@ -7,7 +7,10 @@ CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -lreadline -L /opt/homebrew/opt/readline/lib
 RM		= rm -f
 
-SRC =	src/main.c
+SRC =	src/main.c \
+		src/mod_split.c \
+		src/first_check.c \
+		src/utils.c 
 
 OBJS = $(patsubst src/%.c,$(ODIR)/%.o,$(SRC))
 
