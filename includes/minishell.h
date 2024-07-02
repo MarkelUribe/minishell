@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_shell.h                                       :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/06/14 17:36:25 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/02 10:04:50 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,19 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <wait.h>
+
+typedef struct s_tokens
+{
+	char		**command;
+	char		*path;
+	int			infile;
+	int			outfile;
+	struct s_tokens	*next;
+}	t_tokens;
+
+//Utils
+int		len_for(char *line, char c);
+int		first_check(char *line);
+char	**mod_split(char *line, char c);
 
 #endif //MINISHELL_H
