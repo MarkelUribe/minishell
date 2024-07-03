@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/02 10:04:50 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/03 11:51:38 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,21 @@
 # include <readline/history.h>
 # include <wait.h>
 
+typedef struct s_data
+{
+	int			status_code;	//el resultado de ejecucion de comando
+	char		**my_envp;		//la copia de las variables de entorno
+
+	char		**pipe_split;
+	s_tokens	*tokens;
+}	t_data;
+
 typedef struct s_tokens
 {
-	char		**command;
-	char		*path;
-	int			infile;
-	int			outfile;
-	struct s_tokens	*next;
+	char	**cmd;
+	char	*path;
+	int		infile;
+	int		outfile;
 }	t_tokens;
 
 //Utils

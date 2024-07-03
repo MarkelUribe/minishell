@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:33:24 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/02 10:30:17 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/03 12:33:02 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	quote_marks(char *line)
 static int	blank(char *line)
 {
 	int	i;
-xdf
+
 	i = 0;
 	while (line[i] == ' ')
 		i ++;
@@ -77,7 +77,7 @@ static int	pipes(char *line)
 			return (ft_dprintf(2, "Syntax error: Nothing after '|'.\n"), 0);
 		}
 	}
-	return (free_split(splited), 1);
+	return (split_free(splited), 1);
 }
 
 int	first_check(char *line)
