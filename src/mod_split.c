@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 10:37:01 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/01 17:27:15 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/03 12:34:10 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	**mod_split(char *line, char c)
 			len = len_for(line, c);
 		result[i] = spliting(line, len);
 		if (!result[i])
-			return (free_split(result), NULL);
+			return (split_free(result), NULL);
 		line += len + 1;
 	}
 	return (result);
