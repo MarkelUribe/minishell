@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/03 11:51:38 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/05 17:01:04 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,32 @@
 # include <readline/history.h>
 # include <wait.h>
 
-typedef struct s_data
-{
-	int			status_code;	//el resultado de ejecucion de comando
-	char		**my_envp;		//la copia de las variables de entorno
-
-	char		**pipe_split;
-	s_tokens	*tokens;
-}	t_data;
-
 typedef struct s_tokens
 {
-	char	**cmd;
-	char	*path;
-	int		infile;
-	int		outfile;
+	char		**cmd;
+	char		*path;
+	int			infile;
+	int			outfile;
+	struct s_tokens	*next;
+	
 }	t_tokens;
+
+typedef struct s_data
+{
+	int			status_code;
+	char		**my_envp;
+	char		**pipe_split;
+	struct s_tokens	*tokens;
+	
+}	t_data;
 
 //Utils
 int		len_for(char *line, char c);
-int		first_check(char *line);
+void	free_tokens(t_tokens **tokens);
+void	add_token_back(t_tokens **lst, t_tokens *new);
 char	**mod_split(char *line, char c);
+
+int		first_check(t_data *data, char *line);
+char	*get_path(char *command, char **envp);
 
 #endif //MINISHELL_H
