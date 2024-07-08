@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:33:24 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/03 12:33:02 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:24:23 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ static int	quote_marks(char *line)
 		simp += (line[i] == '\'') * !(doub % 2);
 		doub += (line[i] == '\"') * !(simp % 2);
 	}
-	if (simp % 2 || doub % 2)
-		return (ft_dprintf(2, "Syntax error: Open quotes.\n"), 0);
-	return (1);
+	if (simp % 2)
+		return (ft_dprintf(2, "Syntax error, open simple quotes \"'\".\n"), 1);
+	if (doub % 2)
+		return (ft_dprintf(2, "Syntax error, open double quotes '\"'.\n"), 1);
+	return (0);
 }
 
 static int	blank(char *line)
@@ -60,27 +62,40 @@ static int	extra_pipe(char *line)
 	return (0);
 }
 
-static int	pipes(char *line)
+static int	pipes(char **splited, char *line)
 {
 	int		i;
-	char	**splited;
 
-	splited = mod_split(line, '|');
+	if (line[0] == '|')
+		return (ft_dprintf(2, "Syntax error near unexpected token '|'.\n"), 0);
 	if (!splited)
 		return (0);
 	i = -1;
 	while (splited[++i])
 	{
 		if (blank(splited[i]) || extra_pipe(splited[i]))
-		{
-			free_split(splited);
-			return (ft_dprintf(2, "Syntax error: Nothing after '|'.\n"), 0);
-		}
+			return (ft_dprintf(2, "Syntax error near unexpected token '|'.\n"), 0);
 	}
-	return (split_free(splited), 1);
+	return (1);
 }
 
-int	first_check(char *line)
+int	first_check(t_data *data, char *line)
 {
-	return (quote_marks(line) && pipes(line));
+	if (blank(line))
+		return (0);
+	if (quote_marks(line))
+		return (0);
+	if (len_for(line, '|') > -1)
+	{
+		data->pipe_split = mod_split(line, '|');
+		return (pipes(data->pipe_split, line));
+	}
+	data->pipe_split = (char **)malloc(2 * sizeof(char *));
+	if (!data->pipe_split)
+		return (0);
+	data->pipe_split[0] = ft_strdup(line);
+	if (!data->pipe_split[0])
+		return (0);
+	data->pipe_split[1] = NULL;
+	return (1);
 }

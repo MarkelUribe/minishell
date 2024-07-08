@@ -3,14 +3,15 @@ CC = gcc
 ODIR = src/obj
 LIBFT_LIB = src/libft/
 LIBFT_FLAGS = -L src/libft/ -lft
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=leak
 LDFLAGS = -lreadline -L /opt/homebrew/opt/readline/lib
 RM		= rm -f
 
-SRC =	src/main.c \
-		src/mod_split.c \
+SRC =	src/mod_split.c \
 		src/first_check.c \
-		src/utils.c 
+		src/get_path.c \
+		src/utils.c \
+		src/main.c
 
 OBJS = $(patsubst src/%.c,$(ODIR)/%.o,$(SRC))
 
