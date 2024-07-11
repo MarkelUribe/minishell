@@ -6,26 +6,11 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 12:38:21 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/05 14:21:22 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:26:02 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*get_env(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-			return (&envp[i][5]);
-		i ++;
-	}
-	ft_dprintf(2, "Error: couldn't find the PATH from the envp.\n");
-	return (NULL);
-}
 
 static char	*search_command_path(char	**paths, char *command)
 {
@@ -48,7 +33,6 @@ static char	*search_command_path(char	**paths, char *command)
 		free(command_path);
 		i ++;
 	}
-	ft_dprintf(2, "Error: '%s' command not found.\n", command);
 	return (NULL);
 }
 
@@ -58,10 +42,13 @@ char	*get_path(char *command, char **envp)
 	char	*env_path;
 	char	**paths;
 
-	env_path = get_env(envp);
-	if (!env_path)
+	if (!command)
 		return (NULL);
+	env_path = get_env(envp, "PATH");
+	if (!env_path)
+		return (ft_dprintf(2, "Error: couldn't find the PATH from the envp.\n"), NULL);
 	paths = ft_split(env_path, ':');
+	free (env_path);
 	if (!paths)
 		return (NULL);
 	command_path = search_command_path(paths, command);

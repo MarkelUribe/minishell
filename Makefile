@@ -11,6 +11,7 @@ SRC =	src/mod_split.c \
 		src/first_check.c \
 		src/get_path.c \
 		src/utils.c \
+		src/expand.c \
 		src/main.c
 
 OBJS = $(patsubst src/%.c,$(ODIR)/%.o,$(SRC))

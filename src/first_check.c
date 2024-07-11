@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:33:24 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/08 13:24:23 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:14:22 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,6 @@ static int	quote_marks(char *line)
 	if (doub % 2)
 		return (ft_dprintf(2, "Syntax error, open double quotes '\"'.\n"), 1);
 	return (0);
-}
-
-static int	blank(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] == ' ')
-		i ++;
-	return (!line[i]);
 }
 
 static int	extra_pipe(char *line)
@@ -81,15 +71,16 @@ static int	pipes(char **splited, char *line)
 
 int	first_check(t_data *data, char *line)
 {
-	if (blank(line))
-		return (0);
 	if (quote_marks(line))
 		return (0);
+	data->pipe_split = mod_split(line, '|');
+	if (!data->pipe_split)
+		return (0);
 	if (len_for(line, '|') > -1)
-	{
-		data->pipe_split = mod_split(line, '|');
 		return (pipes(data->pipe_split, line));
-	}
+	return (1);
+}
+/*
 	data->pipe_split = (char **)malloc(2 * sizeof(char *));
 	if (!data->pipe_split)
 		return (0);
@@ -97,5 +88,4 @@ int	first_check(t_data *data, char *line)
 	if (!data->pipe_split[0])
 		return (0);
 	data->pipe_split[1] = NULL;
-	return (1);
-}
+*/
