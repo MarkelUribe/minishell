@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/11 19:18:01 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:14:20 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ typedef struct s_tokens
 	char		*path;
 	char		**infile;
 	char		**outfile;
-	int			fd_in;
-	int			fd_out;
 	struct s_tokens	*next;
 	
 }	t_tokens;
@@ -48,11 +46,12 @@ char	**mod_split(char *line, char c);
 int		blank(char *line);
 char	*get_env(char **envp, char *name);
 char	*mod_join(char *s1, char *s2);
-char	*stringify(char c);
+char	*copy_n(char *line, int n);
 
 //Program
 char	*expand(char *line, char **envp);
-int		first_check(t_data *data, char *line);
+int		first_check(char *line);
 char	*get_path(char *command, char **envp);
+char	*status(int new);
 
 #endif //MINISHELL_H
