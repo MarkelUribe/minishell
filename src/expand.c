@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/11 19:47:39 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/12 13:42:33 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,21 @@ static int	int_var(int	new)
 	int			n;
 
 	n = i;
-	if (new > 0)
+	if (new >= 0)
 		i = new;
 	return (n);
+}
+
+static char	*stringify(char c)
+{
+	char	*str;
+
+	str = (char *)malloc(2 * sizeof(char ));
+	if (!str)
+		return (NULL);
+	str[0] = c;
+	str[1] = '\0';
+	return (str);
 }
 
 static char	*expand_var(char *line, char **envp)
@@ -29,8 +41,8 @@ static char	*expand_var(char *line, char **envp)
 	char	*res;
 	int		i;
 
-	if (line[0] == '$')
-		return ("1");
+	if (line[0] == '?')
+		return (status(-1));
 	i = 0;
 	while (line[i] && ft_isalnum(line[i]))
 		i ++;
@@ -70,6 +82,5 @@ char *expand(char *line, char **envp)
 		else if ((line[j] != '\'' && line[j] != '\"') || (line[j] == '\'' && (doub % 2)) || (line[j] == '\"' && (simp % 2)))
 			res = mod_join(res, stringify(line[j]));
 	}
-	res = mod_join(res, ft_strdup(""));
-	return (res);
+	return (mod_join(res, ft_strdup("")));
 }

@@ -6,11 +6,26 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:36:48 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/11 19:14:35 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:14:10 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*copy_n(char *line, int n)
+{
+	int		i;
+	char	*temp;
+
+	temp = (char *)malloc((n + 1) * sizeof(char ));
+	if (!temp)
+		return (NULL);
+	temp[n] = '\0';
+	i = -1;
+	while(++i < n)
+		temp[i] = line[i];
+	return (temp);
+}
 
 int	len_for(char *line, char c)
 {
@@ -18,18 +33,17 @@ int	len_for(char *line, char c)
 	int	simp;
 	int	doub;
 
-	i = 0;
+	i = -1;
 	simp = 0;
 	doub = 0;
-	while (line[i])
+	while (line[++i])
 	{
 		simp += (line[i] == '\'') * !(doub % 2);
 		doub += (line[i] == '\"') * !(simp % 2);
 		if (line[i] == c && !(simp % 2) && !(doub % 2))
 			return (i);
-		i ++;
 	}
-	return (-1);
+	return (i);
 }
 
 char	*mod_join(char *s1, char *s2)
@@ -54,18 +68,6 @@ char	*mod_join(char *s1, char *s2)
 	return (str);
 }
 
-char	*stringify(char c)
-{
-	char	*str;
-
-	str = (char *)malloc(2 * sizeof(char ));
-	if (!str)
-		return (NULL);
-	str[0] = c;
-	str[1] = '\0';
-	return (str);
-}
-
 char	*get_env(char **envp, char *name)
 {
 	int	i;
@@ -87,6 +89,8 @@ void	free_tokens(t_tokens **tokens)
 	if (!tokens || !*tokens)
 		return ;
 	split_free((*tokens)->cmd);
+	split_free((*tokens)->infile);
+	split_free((*tokens)->outfile);
 	if ((*tokens)->path)
 		free((*tokens)->path);
 	free_tokens(&(*tokens)->next);
