@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 12:38:21 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/11 19:26:02 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:52:11 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*get_path(char *command, char **envp)
 		return (NULL);
 	env_path = get_env(envp, "PATH");
 	if (!env_path)
-		return (ft_dprintf(2, "Error: couldn't find the PATH from the envp.\n"), NULL);
+		return (ft_dprintf(2, "Error: couldn't find the $PATH.\n"), NULL);
 	paths = ft_split(env_path, ':');
 	free (env_path);
 	if (!paths)

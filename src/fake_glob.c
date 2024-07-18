@@ -1,37 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fake_glob.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/18 12:41:22 by kabasolo         ###   ########.fr       */
+/*   Created: 2024/07/18 12:04:51 by kabasolo          #+#    #+#             */
+/*   Updated: 2024/07/18 16:54:39 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+char	*status(int new)
 {
-	char	*line;
+	static int	i;
+	int			n;
 
-	(void)argc;
-	(void)argv;
-	status(0);
-	my_envp(EDIT, split_cpy(envp));
-	line = ft_strdup(" ");
-	using_history();
-	while (ft_strncmp(line, "exit", 5) != 0)
+	n = i;
+	if (new < 0)
+		return (ft_itoa(n));
+	i = new;
+	return (NULL);
+}
+
+char	**my_envp(int mood, char **envp)
+{
+	static char	**my_envp;
+
+	if (mood == READ)
+		return (my_envp);
+	if (mood == FREE)
+		split_free(my_envp);
+	if (mood == EDIT)
 	{
-		if (!line)
-			return (ft_dprintf(2, "readline error\n"), my_envp(FREE, 0), 1);
-		if (!blank(line))
-			michel(line);
-		free(line);
-		line = readline("mini_fuet> ");
+		if (my_envp)
+			free(my_envp);
+		my_envp = envp;
+		return (envp);
 	}
-	my_envp(FREE, 0);
-	free(line);
-	return (0);
+	return (NULL);
 }
