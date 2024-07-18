@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:36:48 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/15 19:14:10 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:51:18 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*copy_n(char *line, int n)
 		return (NULL);
 	temp[n] = '\0';
 	i = -1;
-	while(++i < n)
+	while (++i < n)
 		temp[i] = line[i];
 	return (temp);
 }
@@ -115,20 +115,3 @@ int	blank(char *line)
 		i ++;
 	return (!line[i]);
 }
-/*
-
-void	free_list(t_list **lst)
-{
-	if (!*lst)
-		return ;
-	free_list(&(*lst)->next);
-	free (*lst);
-	*lst = NULL;
-}
-
-int main()
-{
-	printf("%d\n", len_for("duibcujbcjef' | 'hduih|fundfj", '|'));
-	return (0);
-}
-*/

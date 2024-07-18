@@ -6,13 +6,13 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/12 13:42:33 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:52:54 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	int_var(int	new)
+static int	int_var(int new)
 {
 	static int	i;
 	int			n;
@@ -50,21 +50,21 @@ static char	*expand_var(char *line, char **envp)
 	temp[i] = '\0';
 	ft_memcpy(temp, line, i);
 	res = get_env(envp, temp);
-	int_var(ft_strlen(temp));
+	int_var(ft_strlen(temp) - 1);
 	free(temp);
 	if (!res)
 		return (ft_strdup(""));
 	return (res);
 }
 
-char *expand(char *line, char **envp)
+char	*expand(char *line, char **envp)
 {
 	char	*res;
 	int		j;
 	int		simp;
 	int		doub;
 
-	res = (char *)ft_calloc(1, sizeof(char ));
+	res = (char *)ft_calloc(1, sizeof(char));
 	if (!line)
 		return (res);
 	simp = 0;
@@ -79,7 +79,8 @@ char *expand(char *line, char **envp)
 			res = mod_join(res, expand_var(&line[++j], envp));
 			j += int_var(-1);
 		}
-		else if ((line[j] != '\'' && line[j] != '\"') || (line[j] == '\'' && (doub % 2)) || (line[j] == '\"' && (simp % 2)))
+		else if ((line[j] != '\'' && line[j] != '\"') || \
+		(line[j] == '\'' && (doub % 2)) || (line[j] == '\"' && (simp % 2)))
 			res = mod_join(res, stringify(line[j]));
 	}
 	return (mod_join(res, ft_strdup("")));

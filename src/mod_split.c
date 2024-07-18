@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 10:37:01 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/15 19:14:05 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:51:07 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	**mod_split(char *line, char c)
 	char	**result;
 
 	words = count_words(line, c);
-	result = (char **)malloc((words + 1) * sizeof(char *)); 
+	result = (char **)malloc((words + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
 	result[words] = NULL;

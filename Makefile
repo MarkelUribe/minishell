@@ -9,9 +9,13 @@ RM		= rm -f
 
 SRC =	src/mod_split.c \
 		src/first_check.c \
-		src/get_path.c \
 		src/utils.c \
+		src/fake_glob.c \
 		src/expand.c \
+		src/get_cmd.c \
+		src/get_path.c \
+		src/get_file.c \
+		src/michel.c \
 		src/main.c
 
 OBJS = $(patsubst src/%.c,$(ODIR)/%.o,$(SRC))
