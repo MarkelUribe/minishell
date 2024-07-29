@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:16:06 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/18 16:54:18 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:49:06 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,4 @@ char	**get_file(char *line, char c, char **envp)
 	split_free(temp_split1);
 	res[i] = NULL;
 	return (res);
-}
+} // ARREGLAR

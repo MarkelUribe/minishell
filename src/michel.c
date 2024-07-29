@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:41:11 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/18 16:55:05 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:45:45 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static t_tokens	*analize(char *line, char **envp)
 	token->cmd = get_cmd(line, envp);
 	token->path = get_path(token->cmd[0], envp);
 	token->infile = get_file(line, '<', envp);
+	ft_printf("token->infile[0]: %s\n", token->infile[0]);
+	ft_printf("token->infile[1]: %s\n", token->infile[1]);
 	token->outfile = get_file(line, '>', envp);
 	return (token);
 }
@@ -47,12 +49,11 @@ static void	print_data(t_data *data)
 {
 	int	i;
 
-	ft_printf("Cmd: %s\n", data->tokens->cmd[0]);
-	if (data->tokens->path)
-		ft_printf("Path: %s\n", data->tokens->path);
-	i = 0;
+	i = -1;
 	while (data->tokens->cmd[++i])
 		ft_printf("Args[%d]: %s\n", i, data->tokens->cmd[i]);
+	if (data->tokens->path)
+		ft_printf("Path: %s\n", data->tokens->path);
 	i = -1;
 	while (data->tokens->infile[++i])
 		ft_printf("Infiles[%d]: %s\n", i, data->tokens->infile[i]);
@@ -69,8 +70,10 @@ void	michel(char *line)
 	data.tokens = NULL;
 	add_history(line);
 	if (first_check(line))
+	{
 		once_upon_a_time(&data);
-	print_data(&data);
+		print_data(&data);
+	}
 	split_free(data.pipe_split);
 	free_tokens(&data.tokens);
 }

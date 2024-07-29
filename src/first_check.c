@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:33:24 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/15 16:17:25 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:26:00 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,48 @@ static int	quote_marks(char *line)
 	return (0);
 }
 
+static int	redir_checks(char *line, char a, char b)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		i += len_for(&line[i], a);
+		if (line[i] == a)
+		{
+			i += 1 + (line[i + 1] == a);
+			if (line[i] == '\0')
+				return (ft_dprintf\
+			(1, "Syntax error, near unexpected token 'newline'\n", line[i]));
+			while (line[i] == ' ')
+				i ++;
+			if (line[i] == '\0')
+				return (ft_dprintf\
+			(1, "Syntax error, near unexpected token 'newline'\n", line[i]));
+			if (line[i] == a || line[i] == b || line[i] == '|')
+				return (ft_dprintf\
+			(1, "Syntax error, near unexpected token '%c'\n", line[i]));
+		}
+	}
+	return (0);
+}
+
 int	first_check(char *line)
 {
+	int	len1;
+	int	len2;
+	
 	if (quote_marks(line))
+		return (0);
+	len1 = len_for(line, '<');
+	len2 = len_for(line, '>');
+	if (len1 < len2 && line[len1])
+		if (redir_checks(line, '<', '>'))
+			return (0);
+	if (redir_checks(line, '>', '<'))
+		return (0);
+	if (redir_checks(line, '<', '>'))
 		return (0);
 	return (1);
 }
-/*
-	data->pipe_split = (char **)malloc(2 * sizeof(char *));
-	if (!data->pipe_split)
-		return (0);
-	data->pipe_split[0] = ft_strdup(line);
-	if (!data->pipe_split[0])
-		return (0);
-	data->pipe_split[1] = NULL;
-*/
