@@ -12,6 +12,8 @@ SRC =	src/mod_split.c \
 		src/utils.c \
 		src/fake_glob.c \
 		src/expand.c \
+		src/execution.c \
+		src/here_doc.c \
 		src/get_cmd.c \
 		src/get_path.c \
 		src/get_file.c \

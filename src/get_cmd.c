@@ -6,41 +6,21 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:10:22 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/18 16:54:07 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/08/01 19:45:34 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	nearest(char *line, char *limits)
-{
-	int	i;
-	int	simp;
-	int	doub;
-
-	i = 0;
-	simp = 0;
-	doub = 0;
-	while (line[i])
-	{
-		simp += (line[i] == '\'') * !(doub % 2);
-		doub += (line[i] == '\"') * !(simp % 2);
-		if (ft_strchr(limits, line[i]) && !(simp % 2) && !(doub % 2))
-			return (i);
-		i ++;
-	}
-	return (i);
-}
-
-static char	*comand(char *line, char **envp)
+static char	*comand(char *line)
 {
 	char	*temp;
 	char	*cmd;
 	int		len;
 
-	len = nearest(line, "< >");
+	len = closest(line, "< >");
 	temp = copy_n(line, len);
-	cmd = expand(temp, envp);
+	cmd = expand(temp);
 	return (free(temp), cmd);
 }
 
@@ -68,14 +48,27 @@ static int	get_len(char *line)
 	return (words);
 }
 
-char	**get_cmd(char *line, char **envp)
+static char	**nulloc(int size, int type)
+{
+	char	**x;
+	int		i;
+
+	x = malloc(size * type);
+	i = -1;
+	while (++i < size)
+		x[i] = NULL;
+	return (x);
+}
+
+char	**get_cmd(char *line)
 {
 	char	**cmd;
 	int		i;
 	int		j;
 	int		b;
 
-	cmd = (char **)malloc((get_len(line) + 1) * sizeof(char *));
+	j = get_len(line);
+	cmd = (char **)nulloc(j + 1, sizeof(char *));
 	i = -1;
 	j = 0;
 	while (line[j])
@@ -87,10 +80,9 @@ char	**get_cmd(char *line, char **envp)
 				b = 1;
 			j ++;
 		}
-		if (!b)
-			cmd[++i] = comand(&line[j], envp);
-		j += nearest(&line[j], "< >");
+		if (!b && line[j])
+			cmd[++i] = comand(&line[j]);
+		j += closest(&line[j], "< >");
 	}
-	cmd[++i] = NULL;
 	return (cmd);
 }

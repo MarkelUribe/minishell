@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/18 16:52:54 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:43:13 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,7 @@ static int	int_var(int new)
 	return (n);
 }
 
-static char	*stringify(char c)
-{
-	char	*str;
-
-	str = (char *)malloc(2 * sizeof(char ));
-	if (!str)
-		return (NULL);
-	str[0] = c;
-	str[1] = '\0';
-	return (str);
-}
-
-static char	*expand_var(char *line, char **envp)
+static char	*expand_var(char *line)
 {
 	char	*temp;
 	char	*res;
@@ -49,7 +37,7 @@ static char	*expand_var(char *line, char **envp)
 	temp = (char *)malloc((i + 1) * sizeof(char ));
 	temp[i] = '\0';
 	ft_memcpy(temp, line, i);
-	res = get_env(envp, temp);
+	res = get_env(my_envp(READ, 0), temp);
 	int_var(ft_strlen(temp) - 1);
 	free(temp);
 	if (!res)
@@ -57,7 +45,7 @@ static char	*expand_var(char *line, char **envp)
 	return (res);
 }
 
-char	*expand(char *line, char **envp)
+char	*expand(char *line)
 {
 	char	*res;
 	int		j;
@@ -76,7 +64,7 @@ char	*expand(char *line, char **envp)
 		doub += (line[j] == '\"') * !(simp % 2);
 		if (line[j] == '$' && !(simp % 2))
 		{
-			res = mod_join(res, expand_var(&line[++j], envp));
+			res = mod_join(res, expand_var(&line[++j]));
 			j += int_var(-1);
 		}
 		else if ((line[j] != '\'' && line[j] != '\"') || \
