@@ -6,11 +6,30 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:36:48 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/18 16:51:18 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:14:01 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	closest(char *line, char *limits)
+{
+	int	i;
+	int	simp;
+	int	doub;
+
+	i = -1;
+	simp = 0;
+	doub = 0;
+	while (line[++i])
+	{
+		simp += (line[i] == '\'') * !(doub % 2);
+		doub += (line[i] == '\"') * !(simp % 2);
+		if (ft_strchr(limits, line[i]) && !(simp % 2) && !(doub % 2))
+			return (i);
+	}
+	return (i);
+}
 
 char	*copy_n(char *line, int n)
 {
@@ -89,8 +108,7 @@ void	free_tokens(t_tokens **tokens)
 	if (!tokens || !*tokens)
 		return ;
 	split_free((*tokens)->cmd);
-	split_free((*tokens)->infile);
-	split_free((*tokens)->outfile);
+	split_free((*tokens)->files);
 	if ((*tokens)->path)
 		free((*tokens)->path);
 	free_tokens(&(*tokens)->next);
@@ -114,4 +132,16 @@ int	blank(char *line)
 	while (line[i] == ' ')
 		i ++;
 	return (!line[i]);
+}
+
+char	*stringify(char c)
+{
+	char	*str;
+
+	str = (char *)malloc(2 * sizeof(char ));
+	if (!str)
+		return (NULL);
+	str[0] = c;
+	str[1] = '\0';
+	return (str);
 }

@@ -6,11 +6,12 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:47:03 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/08 12:11:40 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/08/02 12:55:46 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 void	split_free(char **splited)
 {

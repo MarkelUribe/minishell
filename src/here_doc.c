@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/08/02 11:42:29 by kabasolo         ###   ########.fr       */
+/*   Created: 2024/05/21 17:46:46 by kabasolo          #+#    #+#             */
+/*   Updated: 2024/08/02 19:38:36 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+static void	read_the_terminal(int fd, char *limit)
 {
-	char	*line;
+	char	*input;
+	int		len;
 
-	(void)argc;
-	(void)argv;
-	status(0);
-	my_envp(EDIT, split_cpy(envp));
-	line = ft_strdup(" ");
-	using_history();
-	while (line && ft_strncmp(line, "exit", 5) != 0)
+	len = ft_strlen(limit);
+	limit[len] = '\n';
+	while (1)
 	{
-		if (!blank(line))
-			michel(line);
-		free(line);
-		line = readline("mini_fuet> ");
+		ft_printf("> ");
+		input = get_next_line(0);
+		if (ft_strncmp(input, limit, len + 1) == 0)
+			return (free(input));
+		ft_dprintf(fd, input);
+		free(input);
 	}
-	my_envp(FREE, 0);
-	if (!line)
-		ft_dprintf(2, "readline error\n");
-	else
-		free(line);
-	return (0);
+}
+
+int	here_doc(char *limit)
+{
+	int	fd[2];
+
+	if (pipe(fd) == -1)
+		return (-1);
+	read_the_terminal(fd[1], limit);
+	close(fd[1]);
+	return (fd[0]);
 }
