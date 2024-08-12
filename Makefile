@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/08/12 15:45:23 by muribe-l          #+#    #+#              #
+#    Updated: 2024/08/12 15:45:24 by muribe-l         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = minishell
 CC = gcc
 ODIR = src/obj
@@ -24,7 +36,10 @@ OBJS = $(patsubst src/%.c,$(ODIR)/%.o,$(SRC))
 
 all: $(NAME)
 
-$(ODIR)/%.o: src/%.c
+$(ODIR):
+		mkdir -p $(ODIR)
+
+$(ODIR)/%.o: src/%.c | $(ODIR)
 		$(CC) -I includes/. $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
