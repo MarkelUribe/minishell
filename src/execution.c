@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:38:04 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/08/02 19:44:06 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:10:56 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,9 @@ static void child(int infile, int outfile, t_tokens *tokens)
 	fd = open_files(tokens->files);
 	if (!fd)
 		return ;
-	if (!tokens->path)
-		return(ft_dprintf(2, "Comand not found '%s'\n", tokens->cmd[0]), free(fd));
+	if (!tokens->path || tokens->cmd[0][0] == '\0')
+		return(
+			ft_dprintf(2, "Comand '%s' not found\n", tokens->cmd[0]), free(fd));
 	pid = fork();
 	if (pid == 0)
 	{
