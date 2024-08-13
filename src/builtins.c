@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 18:36:39 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/08/13 17:55:13 by muribe-l         ###   ########.fr       */
+/*   Created: 2024/08/13 17:39:27 by muribe-l          #+#    #+#             */
+/*   Updated: 2024/08/13 18:26:59 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "minishell.h"
 
-typedef struct s_tokens
+t_directory get_current_directory()
 {
-	char			**cmd;
-	char			*path;
-	char			**files;
-	struct s_tokens	*next;
-}	t_tokens;
+	t_directory directory;
 
-typedef struct s_data
+	
+}
+
+int	builtin(t_tokens *tokens)
 {
-	char			**pipe_split;
-	struct s_tokens	*tokens;
-}	t_data;
-
-typedef struct s_directory
-{
-	char			*directory;
-	struct s_directory	*next;
-}	t_directory;
-
-#endif //STRUCTS_H
+	
+}

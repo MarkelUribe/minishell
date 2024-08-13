@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 18:36:39 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/08/13 17:55:13 by muribe-l         ###   ########.fr       */
+/*   Created: 2024/08/13 17:35:19 by muribe-l          #+#    #+#             */
+/*   Updated: 2024/08/13 17:38:10 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "libft.h"
 
-typedef struct s_tokens
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	char			**cmd;
-	char			*path;
-	char			**files;
-	struct s_tokens	*next;
-}	t_tokens;
+	size_t	i;
+	size_t	n;
 
-typedef struct s_data
-{
-	char			**pipe_split;
-	struct s_tokens	*tokens;
-}	t_data;
-
-typedef struct s_directory
-{
-	char			*directory;
-	struct s_directory	*next;
-}	t_directory;
-
-#endif //STRUCTS_H
+	if (ft_strlen(s1) > ft_strlen(s2))
+		n = ft_strlen(s1);
+	else
+		n = ft_strlen(s2);
+	i = 0;
+	if (n <= 0)
+		return (0);
+	while (s1[i] == s2[i])
+	{
+		if (s1[i] == '\0' || i == n - 1)
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i ++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
