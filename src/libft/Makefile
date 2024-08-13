@@ -10,6 +10,7 @@ SOURCES = \
 	ft_strlen.c \
 	ft_bzero.c \
 	ft_strncmp.c \
+	ft_strcmp.c \
 	ft_isalnum.c \
 	ft_strnstr.c \
 	ft_isalpha.c \

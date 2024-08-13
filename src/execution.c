@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:38:04 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/08/12 17:10:56 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:50:58 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ static void	exec(int infile, int outfile, t_tokens *tokens)
 		close(outfile);	
 	}
 	dup2(infile, STDIN_FILENO);
-	execve(tokens->path, tokens->cmd, my_envp(READ, 0));
-	ft_dprintf(2, "Error: execve() failed.\n");
+	if (!builtin(tokens))
+	{
+		execve(tokens->path, tokens->cmd, my_envp(READ, 0));
+		ft_dprintf(2, "Error: execve() failed.\n");
+	}
 	exit(1);
 }
 
