@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:38:04 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/08/13 17:50:58 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:24:37 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,25 @@ static int *open_files(char **files)
 	return (fd);
 }
 
+static int	is_builtin(char *cmd)
+{
+	if (!ft_strcmp(cmd, "pwd"))
+		return (1);
+	if (!ft_strcmp(cmd, "cd"))
+		return (1);
+	if (!ft_strcmp(cmd, "echo"))
+		return (1);
+	if (!ft_strcmp(cmd, "export"))
+		return (1);
+	if (!ft_strcmp(cmd, "unset"))
+		return (1);
+	if (!ft_strcmp(cmd, "env"))
+		return (1);
+	if (!ft_strcmp(cmd, "exit"))
+		return (1);
+	return (0);
+}
+
 static void child(int infile, int outfile, t_tokens *tokens)
 {
 	int	pid;
@@ -92,7 +111,7 @@ static void child(int infile, int outfile, t_tokens *tokens)
 	fd = open_files(tokens->files);
 	if (!fd)
 		return ;
-	if (!tokens->path || tokens->cmd[0][0] == '\0')
+	if ((!tokens->path || tokens->cmd[0][0] == '\0') && !is_builtin(tokens->cmd[0]))
 		return(
 			ft_dprintf(2, "Comand '%s' not found\n", tokens->cmd[0]), free(fd));
 	pid = fork();
