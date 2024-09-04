@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/08/02 18:56:54 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/04 13:20:06 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ char	**get_cmd(char *line);
 char	*get_path(char *command);
 char	**get_files(char *line);
 int		first_check(char *line);
+int		builtin(t_tokens *tokens);
 
 #endif //MINISHELL_H
