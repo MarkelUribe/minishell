@@ -84,6 +84,7 @@ static int *open_files(char **files)
 	return (fd);
 }
 
+/* Check if the command is a built-in */
 static int	is_builtin(char *cmd)
 {
 	if (!ft_strcmp(cmd, "pwd"))

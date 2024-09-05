@@ -6,13 +6,13 @@
 #    By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 15:45:23 by muribe-l          #+#    #+#              #
-#    Updated: 2024/09/04 12:53:51 by muribe-l         ###   ########.fr        #
+#    Updated: 2024/09/05 12:02:40 by muribe-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-ODIR = src/obj
+ODIR = obj
 LIBFT_LIB = src/libft/
 LIBFT_FLAGS = -L src/libft/ -lft
 CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=leak
@@ -31,7 +31,14 @@ SRC =	src/mod_split.c \
 		src/get_file.c \
 		src/michel.c \
 		src/main.c \
-		src/builtins.c
+		src/builtins/builtins.c \
+		src/builtins/cd.c \
+		src/builtins/echo.c \
+		src/builtins/env.c \
+		src/builtins/exit.c \
+		src/builtins/export.c \
+		src/builtins/pwd.c \
+		src/builtins/unset.c
 
 OBJS = $(patsubst src/%.c,$(ODIR)/%.o,$(SRC))
 
@@ -39,16 +46,18 @@ all: $(NAME)
 
 $(ODIR):
 		mkdir -p $(ODIR)
+		find src -type d -exec mkdir -p $(ODIR)/{} \;
 
 $(ODIR)/%.o: src/%.c | $(ODIR)
-		$(CC) -I includes/. $(CFLAGS) -c $< -o $@
+	mkdir -p $(dir $@)
+	$(CC) -I includes/. $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 		@make -C $(LIBFT_LIB)
 		@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LIBFT_FLAGS) -o $(NAME)
 
 clean:
-		$(RM) src/*/*.o
+		$(RM) $(ODIR)/*/*.o
 
 fclean:	clean
 		$(RM) $(NAME)
