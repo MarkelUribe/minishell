@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/04 17:23:03 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/06 12:16:38 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	status(0);
-	my_envp(EDIT, split_cpy(envp));
+	my_envp(EDIT, envp);
 	line = ft_strdup(" ");
 	using_history();
 	while (line && ft_strncmp(line, "exit", 5) != 0)
