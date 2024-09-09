@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:25:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/08/13 17:38:23 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:56:13 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int		ft_dprintf(int fd, char const *s, ...);
 char	**split_cpy(char **splited);
 void	split_free(char **splited);
 int		split_len(char **splited);
+char	*ft_strsubcpy(char *string, int x, int y);
 
 #endif //LIBFT.H
