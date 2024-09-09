@@ -62,6 +62,7 @@ SOURCES = \
 	get_next_line.c \
 	free_list.c \
 	ft_dprintf.c \
+	ft_strsubcpy.c \
 
 OBJECTS = $(SOURCES:%.c=%.o)
 
