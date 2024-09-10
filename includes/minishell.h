@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/09 17:34:06 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:30:29 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int		first_check(char *line);
 //Builtins
 int		builtin(t_tokens *tokens);
 void	built_cd(t_tokens *tokens);
-void	built_pwd();
-void    built_export(char	*var);
-void	built_env();
+void	built_pwd(void);
+void	built_export(char	*var);
+void	built_env(void);
+int		exit_shell(void);
 
 #endif //MINISHELL_H

@@ -6,7 +6,7 @@
 #    By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 15:45:23 by muribe-l          #+#    #+#              #
-#    Updated: 2024/09/05 12:02:40 by muribe-l         ###   ########.fr        #
+#    Updated: 2024/09/10 14:43:14 by muribe-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ $(NAME): $(OBJS)
 		@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LIBFT_FLAGS) -o $(NAME)
 
 clean:
-		$(RM) $(ODIR)/*/*.o
+		find $(ODIR) -type f -name "*.o" -delete
 
 fclean:	clean
 		$(RM) $(NAME)

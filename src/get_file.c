@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:16:06 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/08/02 19:32:42 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:58:08 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ char	**get_files(char *line)
 		i += (line[i] == '<' || line[i] == '>');
 		i += (line[i] == '<' || line[i] == '>');
 		i += closest(&line[i], "<>");
-		
 	}
 	res[++n] = NULL;
 	return (res);

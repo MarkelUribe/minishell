@@ -6,13 +6,13 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:31 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/09 13:20:50 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:56:07 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	built_env()
+void	built_env(void)
 {
 	char	**my_env;
 	int		i;
