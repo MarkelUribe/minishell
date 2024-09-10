@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:08 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/10 13:35:34 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:55:49 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	var_name_len(char *env)
 	int		i;
 
 	i = 0;
-	while(env[i] != '\0')
+	while (env[i] != '\0')
 	{
 		if (env[i] == '=')
 			return (i);
@@ -39,7 +39,7 @@ static int	filter_variable(char **my_env, char *var)
 	if (l == -1)
 		return (-1);
 	i = -1;
-	while(my_env[++i])
+	while (my_env[++i])
 	{
 		if (ft_strncmp(my_env[i], var, l) == 0)
 			return (i);

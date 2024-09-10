@@ -64,12 +64,18 @@ SOURCES = \
 	ft_dprintf.c \
 	ft_strsubcpy.c \
 
-OBJECTS = $(SOURCES:%.c=%.o)
+ODIR = obj
+
+OBJECTS = $(SOURCES:%.c=$(ODIR)/%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	ar rcs $(NAME) $(OBJECTS)
+
+$(ODIR)/%.o: %.c
+	mkdir -p $(ODIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJECTS)
