@@ -6,13 +6,13 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:08 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/09 18:54:17 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:35:34 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* Returns the length where the variable name ends */
+/* Returns the length where the variable name ends with =*/
 static int	var_name_len(char *env)
 {
 	int		i;
@@ -27,7 +27,7 @@ static int	var_name_len(char *env)
 	return (-1);
 }
 
-/* Returns the enviroment variable number especified in var */
+/* Returns the enviroment variable index especified in var */
 static int	filter_variable(char **my_env, char *var)
 {
 	int	i;
