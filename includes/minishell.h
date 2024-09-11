@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/10 15:30:29 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:39:37 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@ char	**get_files(char *line);
 int		first_check(char *line);
 
 //Builtins
-int		builtin(t_tokens *tokens);
-void	built_cd(t_tokens *tokens);
-void	built_pwd(void);
-void	built_export(char	*var);
-void	built_env(void);
-int		exit_shell(void);
+int		builtin(t_tokens *tokens, int fd);
+void	built_cd(t_tokens *tokens, int fd);
+void	built_pwd(int fd);
+void	built_export(char *var, int fd);
+void	built_env(int fd);
 
 #endif //MINISHELL_H

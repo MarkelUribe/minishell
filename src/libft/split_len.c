@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtrx_len.c                                         :+:      :+:    :+:   */
+/*   split_len.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:54:19 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/03 11:52:28 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:01:20 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	split_len(char **splited)
 	int	i;
 
 	i = 0;
-	while (splited[i])
+	while (splited && splited[i])
 		i ++;
 	return (i);
 }

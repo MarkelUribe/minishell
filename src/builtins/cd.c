@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:13 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/06 10:38:42 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:39:24 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 } */
 
 /* Change directory function */
-void	built_cd(t_tokens *tokens)
+void	built_cd(t_tokens *tokens, int fd)
 {
 	char	*direction;
 
@@ -30,6 +30,6 @@ void	built_cd(t_tokens *tokens)
 	else
 		direction = tokens[0].cmd[1];
 	if (chdir(direction) != 0)
-		ft_dprintf(1, "%s\n", strerror(errno));
+		ft_dprintf(fd, "%s\n", strerror(errno));
 	printf("new: %s\n", getcwd(NULL, 0));
 }

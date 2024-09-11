@@ -6,7 +6,7 @@
 #    By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 15:45:23 by muribe-l          #+#    #+#              #
-#    Updated: 2024/09/10 14:43:14 by muribe-l         ###   ########.fr        #
+#    Updated: 2024/09/11 13:24:18 by muribe-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ SRC =	src/mod_split.c \
 		src/builtins/cd.c \
 		src/builtins/echo.c \
 		src/builtins/env.c \
-		src/builtins/exit.c \
 		src/builtins/export.c \
 		src/builtins/pwd.c \
 		src/builtins/unset.c
