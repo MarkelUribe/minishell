@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:08 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/10 14:55:49 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:50:19 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	filter_variable(char **my_env, char *var)
 }
 
 /* Changes the given env variable to the new value */
-void	built_export(char *var)
+void	built_export(char *var, int fd)
 {
 	char	**my_env;
 	int		i;
@@ -56,19 +56,25 @@ void	built_export(char *var)
 	my_env = split_cpy(my_envp(READ, NULL));
 	i = filter_variable(my_env, var);
 	if (i == -1)
-		return (built_env());
+		return (built_env(fd));
 	if (i <= split_len(my_env))
 	{
-		my_env[i] = ft_realloc(my_env[i], sizeof(char) * (ft_strlen(var) + 1));
+		free(my_env[i]);
+		my_env[i] = malloc(sizeof(char) * (ft_strlen(var) + 1));
 		if (!my_env[i])
 			return ;
 		ft_strlcpy(my_env[i], var, ft_strlen(var) + 1);
 		my_envp(EDIT, my_env);
 		return ;
 	}
-	my_env = ft_realloc(my_env, sizeof(char *) * (split_len(my_env) + 1));
+	my_env = ft_realloc(my_env, (sizeof(char *) * (split_len(my_env) + 2)));
 	if (!my_env)
 		return ;
-	ft_strlcpy(my_env[split_len(my_env)], var, ft_strlen(var) + 1);
+	/* my_env[split_len(my_env) - 1] = malloc(sizeof(char) * (ft_strlen(var) + 1));
+	if (!my_env[split_len(my_env) - 1])
+		return ;
+	ft_strlcpy(my_env[split_len(my_env) - 1], var, ft_strlen(var)); */
+	my_env[split_len(my_env) - 1] = var;
+	my_env[split_len(my_env)] = NULL;
 	my_envp(EDIT, my_env);
 }

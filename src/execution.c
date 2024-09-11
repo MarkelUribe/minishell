@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:38:04 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/09 18:14:36 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:40:33 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ static void	exec(int infile, int outfile, t_tokens *tokens)
 		close(outfile);	
 	}
 	dup2(infile, STDIN_FILENO);
-	if (!builtin(tokens))
-	{
-		execve(tokens->path, tokens->cmd, my_envp(READ, 0));
-		ft_dprintf(2, "Error: execve() failed.\n");
-	}
+	execve(tokens->path, tokens->cmd, my_envp(READ, 0));
+	ft_dprintf(2, "Error: execve() failed.\n");
 	exit(1);
 }
 
@@ -99,8 +96,6 @@ static int	is_builtin(char *cmd)
 		return (1);
 	if (!ft_strcmp(cmd, "env"))
 		return (1);
-	if (!ft_strcmp(cmd, "exit"))
-		return (1);
 	return (0);
 }
 
@@ -112,7 +107,9 @@ static void child(int infile, int outfile, t_tokens *tokens)
 	fd = open_files(tokens->files);
 	if (!fd)
 		return ;
-	if ((!tokens->path || tokens->cmd[0][0] == '\0') && !is_builtin(tokens->cmd[0]))
+	if (is_builtin(tokens->cmd[0]))
+		return (builtin(tokens, fd[1]), free(fd));
+	if (!tokens->path || tokens->cmd[0][0] == '\0')
 		return(
 			ft_dprintf(2, "Comand '%s' not found\n", tokens->cmd[0]), free(fd));
 	pid = fork();
