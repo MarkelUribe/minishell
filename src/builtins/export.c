@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:08 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/11 14:50:19 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:13:34 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,15 @@ void	built_export(char *var, int fd)
 		my_envp(EDIT, my_env);
 		return ;
 	}
+	ft_dprintf(fd, "size bef: %d\n", split_len);
 	my_env = ft_realloc(my_env, (sizeof(char *) * (split_len(my_env) + 2)));
+	ft_dprintf(fd, "size af: %d\n", split_len);
 	if (!my_env)
 		return ;
-	/* my_env[split_len(my_env) - 1] = malloc(sizeof(char) * (ft_strlen(var) + 1));
-	if (!my_env[split_len(my_env) - 1])
+	my_env[split_len(my_env)] = malloc(sizeof(char) * (ft_strlen(var) + 1));
+	if (!my_env[split_len(my_env)])
 		return ;
-	ft_strlcpy(my_env[split_len(my_env) - 1], var, ft_strlen(var)); */
-	my_env[split_len(my_env) - 1] = var;
-	my_env[split_len(my_env)] = NULL;
+	ft_strlcpy(my_env[split_len(my_env)], var, ft_strlen(var) + 1);
+	my_env[split_len(my_env) + 1] = NULL;
 	my_envp(EDIT, my_env);
 }
