@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/16 13:24:28 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:25:39 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ void	built_pwd(int fd);
 void	built_export(char *var, int fd);
 void	built_env(int fd);
 void	built_echo(t_tokens *token, int fd);
+void	built_unset(char *var);
 
 #endif //MINISHELL_H
