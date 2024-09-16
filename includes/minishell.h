@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/11 13:39:37 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:24:28 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ int		first_check(char *line);
 
 //Builtins
 int		builtin(t_tokens *tokens, int fd);
-void	built_cd(t_tokens *tokens, int fd);
+void	built_cd(char *dir, int fd);
 void	built_pwd(int fd);
 void	built_export(char *var, int fd);
 void	built_env(int fd);
+void	built_echo(t_tokens *token, int fd);
 
 #endif //MINISHELL_H

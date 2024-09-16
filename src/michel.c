@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:41:11 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/04 17:19:43 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:12:21 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static t_tokens	*analize(char *line)
 	token = (t_tokens *)malloc(sizeof(t_tokens));
 	if (!token)
 		return (NULL);
+	ft_printf("AAAAAAAAAAAAA: %s\n", line);
 	token->cmd = get_cmd(line);
 	if (access(token->cmd[0], F_OK | X_OK) == 0)
 		token->path = ft_strdup(token->cmd[0]);
