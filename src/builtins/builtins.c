@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 17:39:27 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/11 13:39:40 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:24:55 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@
 int	builtin(t_tokens *tokens, int fd)
 {
 	if (ft_strcmp(tokens[0].cmd[0], "cd") == 0)
-		return (built_cd(tokens, fd), 1);
+		return (built_cd(tokens[0].cmd[1], fd), 1);
 	else if (ft_strcmp(tokens[0].cmd[0], "pwd") == 0)
 		return (built_pwd(fd), 1);
 	else if (ft_strcmp(tokens[0].cmd[0], "export") == 0)
 		return (built_export(tokens[0].cmd[1], fd), 1);
 	else if (ft_strcmp(tokens[0].cmd[0], "env") == 0)
 		return (built_env(fd), 1);
+	else if (ft_strcmp(tokens[0].cmd[0], "echo") == 0)
+		return (built_echo(tokens, fd), 1);
 	return (0);
 }
