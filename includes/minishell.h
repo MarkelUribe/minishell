@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/17 18:14:31 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:37:16 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "utils.h"
 
 //Global variable for signals
-pid_t	g_pid;
+//pid_t	g_pid;
 
 //Fake global vars
 char	*status(int new);
@@ -36,6 +36,7 @@ int		first_check(char *line);
 void	init_signals(void);
 
 //Builtins
+int     is_builtin(char *cmd);
 int		builtin(t_tokens *tokens, int fd);
 void	built_cd(char *dir, int fd);
 void	built_pwd(int fd);
