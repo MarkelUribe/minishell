@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:59 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/16 17:01:07 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:15:59 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,6 @@ int	get_n_words(t_tokens *token)
 	return (n);
 }
 
-/* Prints string ignoring the slash */
-static void	print_anti_slash(int fd, char *s)
-{
-	int	i;
-
-	i = -1;
-	while (s[++i])
-		if (s[i] != 92)
-			write(fd, &s[i], 1);
-}
-
 /* Takes all the parameters and builds a single string */
 void	print_params(t_tokens *token, int n, int fd)
 {
@@ -45,7 +34,7 @@ void	print_params(t_tokens *token, int n, int fd)
 	i = 2 * (n != 0) + (n == 0);
 	while (token[0].cmd[i])
 	{
-		print_anti_slash(fd, token[0].cmd[i]);
+		ft_dprintf(fd, "%s", token[0].cmd[i]);
 		if (get_n_words(token) != i - n)
 			ft_dprintf(fd, " ");
 		i++;
