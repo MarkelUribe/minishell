@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/16 18:25:39 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:14:31 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "libft.h"
 # include "structs.h"
 # include "utils.h"
+
+//Global variable for signals
+pid_t	g_pid;
 
 //Fake global vars
 char	*status(int new);
@@ -30,6 +33,7 @@ char	**get_cmd(char *line);
 char	*get_path(char *command);
 char	**get_files(char *line);
 int		first_check(char *line);
+void	init_signals(void);
 
 //Builtins
 int		builtin(t_tokens *tokens, int fd);

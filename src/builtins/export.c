@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:08 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/17 13:34:16 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:16:34 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	filter_variable(char **my_env, char *var)
 /* Adds new variable in env */
 static void	add_new(char **my_env, char *var)
 {
-	int 	index;
+	int		index;
 	char	**new;
 
 	index = split_len(my_env);

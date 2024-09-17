@@ -6,12 +6,13 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:59 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/17 12:15:59 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:09:51 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Get number of words in token list */
 int	get_n_words(t_tokens *token)
 {
 	int	i;
