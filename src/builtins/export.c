@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:08 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/16 19:47:16 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 13:34:16 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,24 @@ static int	filter_variable(char **my_env, char *var)
 	return (i);
 }
 
-//[0][1][2][3][NULL][]
 /* Adds new variable in env */
 static void	add_new(char **my_env, char *var)
 {
-	my_env = ft_realloc(my_env, sizeof(char *) * split_len(my_env) + 2);
-	if (!my_env)
+	int 	index;
+	char	**new;
+
+	index = split_len(my_env);
+	new = malloc(sizeof(char *) * (index + 3));
+	if (!new)
 		return ;
-	my_env[split_len(my_env)] = malloc(sizeof(char) * (ft_strlen(var) + 1));
-	if (!my_env[split_len(my_env)])
+	ft_memcpy(new, my_env, sizeof(char *) * index);
+	new[index + 2] = NULL;
+	new[index] = malloc(sizeof(char) * (ft_strlen(var) + 1));
+	if (!new[index])
 		return ;
-	ft_strlcpy(my_env[split_len(my_env)], var, ft_strlen(var) + 1);
-	my_env[split_len(my_env)] = NULL;
-	my_envp(EDIT, my_env);
+	ft_strlcpy(new[index], var, ft_strlen(var) + 1);
+	new[index + 1] = NULL;
+	my_envp(EDIT, new);
 }
 
 /* Changes the given env variable to the new value or adds new variable */
