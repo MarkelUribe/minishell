@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:38:04 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/11 13:40:33 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:36:03 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int *open_files(char **files)
 }
 
 /* Check if the command is a built-in */
-static int	is_builtin(char *cmd)
+int	is_builtin(char *cmd)
 {
 	if (!ft_strcmp(cmd, "pwd"))
 		return (1);

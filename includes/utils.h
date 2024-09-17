@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:28:39 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/17 14:58:53 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:36:43 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <wait.h>
 # include <signal.h>
