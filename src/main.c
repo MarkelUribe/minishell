@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/18 12:32:59 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:47:34 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char **argv, char **envp)
 	disable_echo_ctrl_c();
 	while (line && ft_strncmp(line, "exit", 5) != 0)
 	{
-		
 		if (!blank(line))
 			michel(line);
 		free(line);

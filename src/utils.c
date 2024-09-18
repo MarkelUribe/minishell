@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:36:48 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/08/02 14:14:01 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:13:04 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ void	free_tokens(t_tokens **tokens)
 	if (!tokens || !*tokens)
 		return ;
 	split_free((*tokens)->cmd);
-	split_free((*tokens)->files);
 	if ((*tokens)->path)
 		free((*tokens)->path);
 	free_tokens(&(*tokens)->next);

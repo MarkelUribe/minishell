@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:16:06 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/10 14:58:08 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:55:05 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,70 @@ static char	*create_it(char *line)
 	return (res);
 }
 
-char	**get_files(char *line)
+
+static int	open_in(char *name)
+{
+	int	infile;
+
+	if (name[0] == ' ')
+		infile = open(&name[1], O_RDONLY);
+	if (name[0] == '<')
+		infile = here_doc(&name[1]);
+	return (infile);
+}
+
+static int	open_out(char *name)
+{
+	int	outfile;
+
+	if (name[0] == ' ')
+		outfile = open(&name[1], O_CREAT | O_TRUNC | O_RDWR, 0644);
+	if (name[0] == '>')
+		outfile = open(&name[1], O_CREAT | O_APPEND | O_RDWR, 0644);
+	return (outfile);
+}
+
+static int *open_files(char **files)
+{
+	int	i;
+	int	*fd;
+
+	fd = (int *)malloc(2 * sizeof(int));
+	fd[0] = 0;
+	fd[1] = 0;
+	i = 0;
+	while (files[i])
+	{
+		if (files[i][0] == '<')
+			fd[0] = open_in(&files[i][1]);
+		if (files[i][0] == '>')
+			fd[1] = open_out(&files[i][1]);
+		if (fd[0] < 0)
+			return (ft_dprintf(2, "%s: No such file or directory.\n", &files[i][2]), free(fd), NULL);
+		if (fd[1] < 0)
+			return (ft_dprintf(2, "%s: Could not be created.\n", &files[i][2]), free(fd), NULL);
+		if (files[i + 1] && files[i + 1][0] == '<' && fd[0] > 0)
+		{
+			close(fd[0]);
+			fd[0] = 0;
+		}
+		if (files[i + 1] && files[i + 1][0] == '>' && fd[1] > 0)
+		{
+			close(fd[1]);
+			fd[1] = 0;
+		}
+		i ++;
+	}
+	return (fd);
+}
+
+int	get_files(char *line, t_tokens *node)
 {
 	char	**res;
 	int		len;
 	int		n;
 	int		i;
+	int		*fd;
 
 	len = get_size(line, '<') + get_size(line, '>');
 	res = (char **)malloc((len + 1) * sizeof(char *));
@@ -71,7 +129,12 @@ char	**get_files(char *line)
 		i += closest(&line[i], "<>");
 	}
 	res[++n] = NULL;
-	return (res);
+	fd = open_files(res);
+	if (!fd)
+		return (0);
+	node->infile = fd[0];
+	node->outfile = fd[1];
+	return (free(fd), 1);
 }
 
 /*
