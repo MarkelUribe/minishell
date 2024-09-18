@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:36:39 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/04 17:19:10 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:46:29 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ typedef struct s_tokens
 {
 	char			**cmd;
 	char			*path;
-	char			**files;
+	int				infile;
+	int				outfile;
 	struct s_tokens	*next;
 }	t_tokens;
 
