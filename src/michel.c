@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   michel.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:41:11 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/18 11:55:10 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:16:38 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_a_command(t_tokens *token)
 		return (1);
 	temp_path = ft_strdup(token->cmd[0]);
 	cmd = mod_split(token->cmd[0], '/');
-	if (!cmd)
+	if (!cmd || !cmd[0])
 		return (free(temp_path), 0);
 	token->path = get_path(cmd[split_len(cmd) - 1]);
 	if (token->path && ft_strcmp(token->path, temp_path) == 0)
@@ -45,8 +45,10 @@ static t_tokens	*analize(char *line)
 	token = (t_tokens *)malloc(sizeof(t_tokens));
 	if (!token)
 		return (NULL);
-	token->cmd = get_cmd(line);
 	token->files = get_files(line);
+	token->cmd = get_cmd(line);
+	if (!token->cmd || !token->cmd[0])
+		return (NULL);
 	if (is_a_command(token))
 		return (token);
 	potato = stat(token->path, &sb);

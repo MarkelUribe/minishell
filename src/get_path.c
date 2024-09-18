@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 12:38:21 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/30 17:40:40 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:38:28 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*get_path(char *command)
 	char	*env_path;
 	char	**paths;
 
-	if (!command)
+	if (!command || ft_strcmp(command, "/") == 0)
 		return (NULL);
 	env_path = get_env(my_envp(READ, 0), "PATH");
 	if (!env_path)
