@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:28:39 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/17 18:36:43 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/18 11:49:37 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <sys/wait.h>
 # include <wait.h>
 # include <signal.h>
+# include <stdbool.h>
+# include <termios.h>
 
 # define RESET "\001\e[0m\002"
 # define YELLOW "\033[0;33m"

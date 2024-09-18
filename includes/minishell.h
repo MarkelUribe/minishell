@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/17 18:37:16 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/18 11:50:44 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,13 @@ char	**get_cmd(char *line);
 char	*get_path(char *command);
 char	**get_files(char *line);
 int		first_check(char *line);
-void	init_signals(void);
+
+//Signals
+void	init_signals(bool flag);
+void	disable_echo_ctrl_c(void);
 
 //Builtins
-int     is_builtin(char *cmd);
+int		is_builtin(char *cmd);
 int		builtin(t_tokens *tokens, int fd);
 void	built_cd(char *dir, int fd);
 void	built_pwd(int fd);
