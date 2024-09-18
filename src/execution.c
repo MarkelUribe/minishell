@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:38:04 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/18 12:17:40 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:00:11 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	open_out(char *name)
 
 	if (name[0] == ' ')
 		outfile = open(&name[1], O_CREAT | O_TRUNC | O_RDWR, 0644);
-	if (name[0] == '<')
+	if (name[0] == '>')
 		outfile = open(&name[1], O_CREAT | O_APPEND | O_RDWR, 0644);
 	return (outfile);
 }
