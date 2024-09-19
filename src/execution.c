@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:38:04 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/19 10:39:00 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:39:48 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,23 @@ static void	child(int infile, int outfile, t_tokens *tokens)
 {
 	int	pid;
 
+	if (!tokens->next)
+		outfile = 1;
+	if (tokens->infile > 0)
+		infile = tokens->infile;
+	if (tokens->outfile)
+		outfile = tokens->outfile;
 	if (is_builtin(tokens->cmd[0]))
-		return (builtin(tokens, tokens->outfile));
-	if (!tokens->path || tokens->cmd[0][0] == '\0')
+		return (builtin(tokens, outfile));
+	if (!tokens->path)
 		return (
-			(void)ft_dprintf(2, "Comand '%s' not found\n", tokens->cmd[0]));
+			(void)ft_dprintf(2, "%s: command not found\n", tokens->cmd[0]));
+	if (tokens->cmd[0][0] == '\0')
+		return ;
 	init_signals(true);
 	pid = fork();
 	if (pid == 0)
-	{
-		if (!tokens->next)
-			outfile = 1;
-		if (tokens->infile > 0)
-			infile = tokens->infile;
-		if (tokens->outfile)
-			outfile = tokens->outfile;
 		exec(infile, outfile, tokens);
-	}
 }
 
 void	execution(t_tokens *tokens, int n)

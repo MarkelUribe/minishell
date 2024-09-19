@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:08 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/17 18:16:34 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:03:55 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,16 @@ void	built_export(char *var, int fd)
 
 	my_env = split_cpy(my_envp(READ, NULL));
 	if (!var)
-		return (built_env(fd));
+		return (split_free(my_env), built_env(fd));
 	i = filter_variable(my_env, var);
 	if (i == -1)
-		return ;
+		return (split_free(my_env));
 	if (i < split_len(my_env))
 	{
 		free(my_env[i]);
 		my_env[i] = malloc(sizeof(char) * (ft_strlen(var) + 1));
 		if (!my_env[i])
-			return ;
+			return (split_free(my_env));
 		ft_strlcpy(my_env[i], var, ft_strlen(var) + 1);
 		my_envp(EDIT, my_env);
 		return ;
