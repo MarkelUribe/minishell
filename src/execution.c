@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:38:04 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/18 16:35:17 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:39:00 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	exec(int infile, int outfile, t_tokens *tokens)
 	if (outfile != 1)
 	{
 		dup2(outfile, STDOUT_FILENO);
-		close(outfile);	
+		close(outfile);
 	}
 	dup2(infile, STDIN_FILENO);
 	execve(tokens->path, tokens->cmd, my_envp(READ, 0));
@@ -43,16 +43,16 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-static void child(int infile, int outfile, t_tokens *tokens)
+static void	child(int infile, int outfile, t_tokens *tokens)
 {
 	int	pid;
 
 	if (is_builtin(tokens->cmd[0]))
 		return (builtin(tokens, tokens->outfile));
 	if (!tokens->path || tokens->cmd[0][0] == '\0')
-		return(
+		return (
 			(void)ft_dprintf(2, "Comand '%s' not found\n", tokens->cmd[0]));
-	init_signals(true);	
+	init_signals(true);
 	pid = fork();
 	if (pid == 0)
 	{
