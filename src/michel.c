@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   michel.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:41:11 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/18 16:38:27 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:37:11 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	is_a_command(t_tokens *token)
 {
 	char	**cmd;
 	char	*temp_path;
-	
+
 	token->path = get_path(token->cmd[0]);
 	if (token->path || is_builtin(token->cmd[0]))
 		return (1);
@@ -36,7 +36,7 @@ static int	is_a_command(t_tokens *token)
 	return (split_free(cmd), free(temp_path), 0);
 }
 
-int analize(char *line, t_tokens *token)
+int	analize(char *line, t_tokens *token)
 {
 	int			potato;
 	struct stat	sb;
@@ -49,7 +49,9 @@ int analize(char *line, t_tokens *token)
 	potato = stat(token->path, &sb);
 	if (potato == 0 && (sb.st_mode & S_IFMT) == S_IFDIR)
 		ft_printf("bash: %s: Is a directory\n", token->cmd[0]);
-	else if (potato != 0 && closest(token->cmd[0], "/") != (int)ft_strlen(token->cmd[0]))
+	else if (
+		potato != 0 && closest(token->cmd[0], "/")
+		!= (int)ft_strlen(token->cmd[0]))
 		ft_printf("bash: %s: No such file or directory\n", token->cmd[0]);
 	else if (access(token->path, X_OK) == 0)
 		return (1);

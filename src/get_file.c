@@ -3,79 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   get_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:16:06 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/18 14:55:05 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:01:41 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	get_size(char *line, char c)
+static void	close_fd(char **files, int *fd, int i)
 {
-	int	i;
-	int	len;
-	int	n;
-
-	i = len_for(line, c);
-	len = ft_strlen(line);
-	n = 0;
-	while (i < len)
+	if (files[i + 1] && files[i + 1][0] == '<' && fd[0] > 0)
 	{
-		n ++;
-		while (line[i] == c)
-			i ++;
-		i += len_for(&line[i], c);
+		close(fd[0]);
+		fd[0] = 0;
 	}
-	return (n);
+	if (files[i + 1] && files[i + 1][0] == '>' && fd[1] > 0)
+	{
+		close(fd[1]);
+		fd[1] = 0;
+	}
 }
 
-static char	*create_it(char *line)
-{
-	int		i;
-	char	*res;
-	char	*temp;
-
-	temp = (char *)malloc(3 * sizeof(char));
-	temp[0] = line[0];
-	temp[1] = ' ';
-	temp[2] = '\0';
-	if (line[1] == '<' || line[1] == '>')
-		temp[1] = line[1];
-	i = 0;
-	while (line[i] == '<' || line[i] == '>' || line[i] == ' ')
-		i ++;
-	temp = mod_join(temp, copy_n(&line[i], closest(&line[i], "< >\0")));
-	res = expand(temp);
-	free (temp);
-	return (res);
-}
-
-
-static int	open_in(char *name)
-{
-	int	infile;
-
-	if (name[0] == ' ')
-		infile = open(&name[1], O_RDONLY);
-	if (name[0] == '<')
-		infile = here_doc(&name[1]);
-	return (infile);
-}
-
-static int	open_out(char *name)
-{
-	int	outfile;
-
-	if (name[0] == ' ')
-		outfile = open(&name[1], O_CREAT | O_TRUNC | O_RDWR, 0644);
-	if (name[0] == '>')
-		outfile = open(&name[1], O_CREAT | O_APPEND | O_RDWR, 0644);
-	return (outfile);
-}
-
-static int *open_files(char **files)
+static int	*open_files(char **files)
 {
 	int	i;
 	int	*fd;
@@ -91,19 +42,12 @@ static int *open_files(char **files)
 		if (files[i][0] == '>')
 			fd[1] = open_out(&files[i][1]);
 		if (fd[0] < 0)
-			return (ft_dprintf(2, "%s: No such file or directory.\n", &files[i][2]), free(fd), NULL);
+			return (ft_dprintf(2, "%s: No such file or directory.\n",
+					&files[i][2]), free(fd), NULL);
 		if (fd[1] < 0)
-			return (ft_dprintf(2, "%s: Could not be created.\n", &files[i][2]), free(fd), NULL);
-		if (files[i + 1] && files[i + 1][0] == '<' && fd[0] > 0)
-		{
-			close(fd[0]);
-			fd[0] = 0;
-		}
-		if (files[i + 1] && files[i + 1][0] == '>' && fd[1] > 0)
-		{
-			close(fd[1]);
-			fd[1] = 0;
-		}
+			return (ft_dprintf(2, "%s: Could not be created.\n",
+					&files[i][2]), free(fd), NULL);
+		close_fd(files, fd, i);
 		i ++;
 	}
 	return (fd);

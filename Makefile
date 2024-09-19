@@ -6,7 +6,7 @@
 #    By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 15:45:23 by muribe-l          #+#    #+#              #
-#    Updated: 2024/09/17 13:42:58 by muribe-l         ###   ########.fr        #
+#    Updated: 2024/09/19 11:02:47 by muribe-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ RM		= rm -f
 SRC =	src/mod_split.c \
 		src/first_check.c \
 		src/utils.c \
+		src/utils2.c \
 		src/fake_glob.c \
 		src/expand.c \
 		src/execution.c \
@@ -29,6 +30,7 @@ SRC =	src/mod_split.c \
 		src/get_cmd.c \
 		src/get_path.c \
 		src/get_file.c \
+		src/get_file2.c \
 		src/michel.c \
 		src/main.c \
 		src/signals.c \
