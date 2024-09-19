@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fake_glob.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:04:51 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/10 16:07:45 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:50:32 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,6 @@ char	*status(int new)
 	return (NULL);
 }
 
-void	free_split(char **split)
-{
-	int	i;
-
-	i = -1;
-	while (split[++i])
-		free(split[i]);
-}
-
 char	**my_envp(int mood, char **envp)
 {
 	static char	**my_envp;
@@ -44,7 +35,7 @@ char	**my_envp(int mood, char **envp)
 	if (mood == EDIT)
 	{
 		if (my_envp)
-			free_split(my_envp);
+			split_free(my_envp);
 		my_envp = envp;
 		return (envp);
 	}
