@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:41:11 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/19 17:18:37 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:33:57 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	analize(char *line, t_tokens *token)
 		ft_printf("bash: %s: Permission denied\n", token->cmd[0]);
 	else if (token->cmd[0][0] != '\0')
 		ft_printf("%s: command not found\n", token->cmd[0]);
-	return (0);
+	return (status(127), 0);
 }
 
 static int	parsing_and_data(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:08 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/19 17:03:55 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:26:41 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,13 @@ static void	add_new(char **my_env, char *var)
 	char	**new;
 
 	index = split_len(my_env);
-	new = malloc(sizeof(char *) * (index + 3));
+	new = malloc(sizeof(char *) * (index + 2));
 	if (!new)
 		return ;
 	ft_memcpy(new, my_env, sizeof(char *) * index);
-	new[index + 2] = NULL;
 	new[index] = malloc(sizeof(char) * (ft_strlen(var) + 1));
 	if (!new[index])
-		return ;
+		return (free(new));
 	ft_strlcpy(new[index], var, ft_strlen(var) + 1);
 	new[index + 1] = NULL;
 	my_envp(EDIT, new);
