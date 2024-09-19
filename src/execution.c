@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:38:04 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/19 16:39:48 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:37:44 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ static void	child(int infile, int outfile, t_tokens *tokens)
 	if (is_builtin(tokens->cmd[0]))
 		return (builtin(tokens, outfile));
 	if (!tokens->path)
-		return (
-			(void)ft_dprintf(2, "%s: command not found\n", tokens->cmd[0]));
+	{
+		ft_dprintf(2, "%s: command not found\n", tokens->cmd[0]);
+		return ((void)status(127));
+	}
 	if (tokens->cmd[0][0] == '\0')
-		return ;
+		return ((void)status(0));
 	init_signals(true);
 	pid = fork();
 	if (pid == 0)
