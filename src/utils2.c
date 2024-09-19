@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:40:26 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/19 13:42:09 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:44:22 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	blank(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] == ' ')
+	while (line[i] == ' ' || line[i] == '\t')
 		i ++;
 	return (!line[i]);
 }
