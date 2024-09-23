@@ -6,14 +6,14 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:59 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/17 18:09:51 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:08:44 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* Get number of words in token list */
-int	get_n_words(t_tokens *token)
+static int	get_n_words(t_tokens *token)
 {
 	int	i;
 	int	n;
@@ -28,7 +28,7 @@ int	get_n_words(t_tokens *token)
 }
 
 /* Takes all the parameters and builds a single string */
-void	print_params(t_tokens *token, int n, int fd)
+static void	print_params(t_tokens *token, int n, int fd)
 {
 	int		i;
 
@@ -56,4 +56,5 @@ void	built_echo(t_tokens *token, int fd)
 		print_params(token, 1, fd);
 	else
 		print_params(token, 0, fd);
+	status(0);
 }

@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:05 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/16 19:08:25 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 12:34:27 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	filter_variable(char **my_env, char *var)
 }
 
 /* Unset funcition */
-void	built_unset(char *var)
+static void	do_unset(char *var)
 {
 	char	**my_env;
 	int		i;
@@ -45,4 +45,15 @@ void	built_unset(char *var)
 	my_env[i - 1] = NULL;
 	my_envp(EDIT, split_cpy(my_env));
 	free(my_env);
+}
+
+/* Loops all the variables entered to be unset */
+void	built_unset(t_tokens *token)
+{
+	int	i;
+
+	i = 0;
+	while (token[0].cmd[++i])
+		do_unset(token[0].cmd[i]);
+	status(0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:08 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/19 18:26:41 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:53:12 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,18 @@ static void	add_new(char **my_env, char *var)
 	index = split_len(my_env);
 	new = malloc(sizeof(char *) * (index + 2));
 	if (!new)
-		return ;
+		return ((void)status(MALLOC_ERROR));
 	ft_memcpy(new, my_env, sizeof(char *) * index);
 	new[index] = malloc(sizeof(char) * (ft_strlen(var) + 1));
 	if (!new[index])
-		return (free(new));
+		return (free(new), (void)status(MALLOC_ERROR));
 	ft_strlcpy(new[index], var, ft_strlen(var) + 1);
 	new[index + 1] = NULL;
 	my_envp(EDIT, new);
 }
 
 /* Changes the given env variable to the new value or adds new variable */
-void	built_export(char *var, int fd)
+void	do_export(char *var, int fd)
 {
 	char	**my_env;
 	int		i;
@@ -81,10 +81,23 @@ void	built_export(char *var, int fd)
 		free(my_env[i]);
 		my_env[i] = malloc(sizeof(char) * (ft_strlen(var) + 1));
 		if (!my_env[i])
-			return (split_free(my_env));
+			return (split_free(my_env), (void)status(MALLOC_ERROR));
 		ft_strlcpy(my_env[i], var, ft_strlen(var) + 1);
 		my_envp(EDIT, my_env);
 		return ;
 	}
 	add_new(my_env, var);
+}
+
+/* Loops all the export variables entered and exports them */
+void	built_export(t_tokens *token, int fd)
+{
+	int	i;
+
+	if (!token[0].cmd[1])
+		built_env(fd);
+	i = 0;
+	while (token[0].cmd[++i])
+		do_export(token[0].cmd[i], fd);
+	status(0);
 }

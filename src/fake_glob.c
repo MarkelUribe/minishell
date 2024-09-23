@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   fake_glob.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:04:51 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/19 16:50:32 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:40:51 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*status(int new)
+int	status(int new)
 {
 	static int	i;
 	int			n;
 
 	n = i;
 	if (new < 0)
-		return (ft_itoa(n));
+		return (n);
 	i = new;
-	return (NULL);
+	return (i);
 }
 
 char	**my_envp(int mood, char **envp)

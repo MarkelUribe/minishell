@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/19 11:03:31 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:51:19 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@
 # include "structs.h"
 # include "utils.h"
 
-//Global variable for signals
-//pid_t	g_pid;
-
 //Fake global vars
-char	*status(int new);
+int		status(int new);
 char	**my_envp(int mood, char **envp);
 
 //Program
@@ -49,9 +46,10 @@ int		is_builtin(char *cmd);
 void	builtin(t_tokens *tokens, int fd);
 void	built_cd(char *dir, int fd);
 void	built_pwd(int fd);
-void	built_export(char *var, int fd);
+void	built_export(t_tokens *token, int fd);
+void	do_export(char *var, int fd);
 void	built_env(int fd);
 void	built_echo(t_tokens *token, int fd);
-void	built_unset(char *var);
+void	built_unset(t_tokens *token);
 
 #endif //MINISHELL_H

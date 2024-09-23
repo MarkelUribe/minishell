@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:31 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/11 13:38:21 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 12:33:59 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	built_env(int fd)
 	i = -1;
 	while (my_env[++i] != NULL)
 		ft_dprintf(fd, "%s\n", my_env[i]);
+	status(0);
 }
