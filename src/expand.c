@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/07/30 17:43:13 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:42:18 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*expand_var(char *line)
 	int		i;
 
 	if (line[0] == '?')
-		return (status(-1));
+		return (ft_itoa(status(-1)));
 	i = 0;
 	while (line[i] && ft_isalnum(line[i]))
 		i ++;

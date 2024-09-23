@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 18:28:39 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/18 11:49:37 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:37:58 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # define RESET "\001\e[0m\002"
 # define YELLOW "\033[0;33m"
 # define PURPLE "\033[0;35m"
+
+// Status errors
+# define MALLOC_ERROR 42
+# define EXIT_STATUS 66
 
 enum
 {

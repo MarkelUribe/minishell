@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/19 17:14:58 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:49:53 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,21 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	status(0);
 	my_envp(EDIT, split_cpy(envp));
-	line = ft_strdup(" ");
+	line = ft_strdup("");
 	using_history();
 	disable_echo_ctrl_c();
 	welcome_message(envp);
-	while (line && ft_strncmp(line, "exit", 5) != 0)
+	while (line && status(-1) != EXIT_STATUS)
 	{
-		if (!blank(line))
-			michel(line);
 		free(line);
 		init_signals(false);
 		line = readline("🌭mini_fuet> ");
+		if (line && !blank(line))
+			michel(line);
 	}
 	my_envp(FREE, 0);
 	if (line)
 		free(line);
-	else
-		ft_printf("exit\n");
+	ft_printf("exit\n");
 	return (0);
 }
