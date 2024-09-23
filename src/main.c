@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/23 15:49:53 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:18:02 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		free(line);
 		init_signals(false);
-		line = readline("🌭mini_fuet> ");
+		line = readline("mini_fuet🌭 $> ");
 		if (line && !blank(line))
 			michel(line);
 	}
