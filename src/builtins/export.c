@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:08 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/24 12:40:02 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:57:15 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	add_new(char **my_env, char *var)
 		return (free(new), (void)status(MALLOC_ERROR));
 	ft_strlcpy(new[index], var, ft_strlen(var) + 1);
 	new[index + 1] = NULL;
+	free(my_env);
 	my_envp(EDIT, new);
 }
 
