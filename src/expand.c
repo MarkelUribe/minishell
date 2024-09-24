@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/23 15:42:18 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 12:20:48 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ static char	*expand_var(char *line)
 	char	*res;
 	int		i;
 
+	int_var(0);
 	if (line[0] == '?')
 		return (ft_itoa(status(-1)));
+	if (line[0] == '$')
+		return (ft_strdup(""));
 	i = 0;
 	while (line[i] && ft_isalnum(line[i]))
 		i ++;
@@ -58,11 +61,11 @@ char	*expand(char *line)
 	simp = 0;
 	doub = 0;
 	j = -1;
-	while (++j < (int)ft_strlen(line))
+	while (line[++j])
 	{
 		simp += (line[j] == '\'') * !(doub % 2);
 		doub += (line[j] == '\"') * !(simp % 2);
-		if (line[j] == '$' && !(simp % 2))
+		if (line[j] == '$' && line[j + 1] && !(simp % 2))
 		{
 			res = mod_join(res, expand_var(&line[++j]));
 			j += int_var(-1);
