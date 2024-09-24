@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:08 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/23 15:53:12 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 12:40:02 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ static int	var_name_len(char *env)
 {
 	int		i;
 
-	i = 0;
-	while (env[i] != '\0')
-	{
+	i = -1;
+	while (env[++i] != '\0')
 		if (env[i] == '=')
 			return (i);
-		i++;
-	}
 	return (-1);
 }
 
