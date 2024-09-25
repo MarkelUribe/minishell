@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:05 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/23 12:34:27 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:36:55 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 /* Returns the enviroment variable index especified in var */
 static int	filter_variable(char **my_env, char *var)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
 	if (!var)
 		return (-1);
 	i = -1;
+	tmp = get_env(my_env, var);
+	if (!tmp)
+		return (-1);
+	free(tmp);
 	while (my_env[++i])
 		if (ft_strncmp(my_env[i], var, ft_strlen(var)) == 0)
 			return (i);
