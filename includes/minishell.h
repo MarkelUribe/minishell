@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/23 15:51:19 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:51:20 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		open_in(char *name);
 int		open_out(char *name);
 
 //Signals
-void	init_signals(bool flag);
+void	init_signals(int flag);
 void	disable_echo_ctrl_c(void);
 
 //Builtins

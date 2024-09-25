@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:38:04 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/23 11:46:01 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/25 12:12:24 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minishell.h"
 
 #include "minishell.h"
 
@@ -25,27 +27,7 @@ static void	exec(int infile, int outfile, t_tokens *tokens)
 	exit(1);
 }
 
-/* Check if the command is a built-in */
-int	is_builtin(char *cmd)
-{
-	if (!ft_strcmp(cmd, "pwd"))
-		return (1);
-	if (!ft_strcmp(cmd, "cd"))
-		return (1);
-	if (!ft_strcmp(cmd, "echo"))
-		return (1);
-	if (!ft_strcmp(cmd, "export"))
-		return (1);
-	if (!ft_strcmp(cmd, "unset"))
-		return (1);
-	if (!ft_strcmp(cmd, "env"))
-		return (1);
-	if (!ft_strcmp(cmd, "exit"))
-		return (1);
-	return (0);
-}
-
-static void	child(int infile, int outfile, t_tokens *tokens)
+static int	child(int infile, int outfile, t_tokens *tokens)
 {
 	int	pid;
 
@@ -56,32 +38,48 @@ static void	child(int infile, int outfile, t_tokens *tokens)
 	if (tokens->outfile)
 		outfile = tokens->outfile;
 	if (is_builtin(tokens->cmd[0]))
-		return (builtin(tokens, outfile));
+		return (builtin(tokens, outfile), 0);
 	if (!tokens->path)
 	{
 		ft_dprintf(2, "%s: command not found\n", tokens->cmd[0]);
-		return ((void)status(127));
+		return ((void)status(127), 0);
 	}
-	if (tokens->cmd[0][0] == '\0')
-		return ((void)status(0));
-	init_signals(true);
+	init_signals(1);
 	pid = fork();
 	if (pid == 0)
 		exec(infile, outfile, tokens);
+	return (pid);
+}
+
+static void	wait_childs_to_come_back_from_vietnam(int *pid, int i, int stat)
+{
+	if (i == 0)
+		return ;
+	if (pid[0] > 0)
+	{
+		waitpid(pid[0], &stat, 0);
+		if (WIFEXITED(stat))
+			status(WEXITSTATUS(stat));
+	}
+	wait_childs_to_come_back_from_vietnam(&pid[1], i - 1, 0);
 }
 
 void	execution(t_tokens *tokens, int n)
 {
+	int	i;
+	int	*pid;
 	int	temp;
 	int	fd[2];
 
-	if (!tokens->cmd[0])
-		return ;
+	if (!tokens->cmd[0] || !tokens->cmd[0][0])
+		return ((void)status(0));
+	pid = (int *)malloc(n * sizeof(int));
+	i = -1;
 	temp = 0;
 	while (tokens)
 	{
 		pipe(fd);
-		child(temp, fd[1], tokens);
+		pid[++i] = child(temp, fd[1], tokens);
 		close(fd[1]);
 		if (temp != 0)
 			close(temp);
@@ -91,6 +89,6 @@ void	execution(t_tokens *tokens, int n)
 			close(fd[0]);
 		tokens = tokens->next;
 	}
-	while (n--)
-		wait(NULL);
+	wait_childs_to_come_back_from_vietnam(pid, i + 1, 0);
+	free(pid);
 }
