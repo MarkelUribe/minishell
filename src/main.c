@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/24 14:58:07 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/25 12:04:52 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	main(int argc, char **argv, char **envp)
 	while (line && status(-1) != EXIT_STATUS)
 	{
 		free(line);
-		init_signals(false);
-		line = readline("mini_fuet🌭 $> ");
+		init_signals(0);
+		line = readline("\x1b[33mmini_fuet🌭$>\033[0m ");
 		if (line && !blank(line))
 			michel(line);
 	}

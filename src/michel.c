@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:41:11 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/19 18:33:57 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:15:51 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static int	parsing_and_data(t_data *data)
 		if (!node)
 			return (0);
 		n += !get_files(data->pipe_split[i], node);
+		init_signals(0);
 		n += !analize(data->pipe_split[i], node);
 		add_token_back(&data->tokens, node);
 	}
