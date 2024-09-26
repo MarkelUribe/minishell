@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 13:42:28 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/25 16:31:26 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:54:06 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	handle_true(int sig)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 0);
+		status(130);
 	}
 	return ;
 }

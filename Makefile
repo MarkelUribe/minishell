@@ -6,7 +6,7 @@
 #    By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 15:45:23 by muribe-l          #+#    #+#              #
-#    Updated: 2024/09/23 15:51:23 by muribe-l         ###   ########.fr        #
+#    Updated: 2024/09/26 12:37:55 by muribe-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC =	src/mod_split.c \
 		src/builtins/export.c \
 		src/builtins/pwd.c \
 		src/builtins/unset.c \
+		src/builtins/exit.c \
 
 OBJS = $(patsubst src/%.c,$(ODIR)/%.o,$(SRC))
 

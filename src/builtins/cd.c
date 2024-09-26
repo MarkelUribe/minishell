@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:13 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/23 17:15:34 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:18:57 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	oldpwd(char *dir, char *export, char *old, int fd)
 		return (free(old), free(dir), (void)status(MALLOC_ERROR));
 	ft_strlcpy(export, "OLDPWD=", 8);
 	ft_strlcat(export, old, ft_strlen(old) + ft_strlen(export) + 1);
-	do_export(export, fd);
+	do_export(export, fd, 0);
 	free(export);
 }
 
@@ -59,7 +59,7 @@ void	built_cd(char *dir, int fd)
 		return (free(old), free(ndir), (void)status(MALLOC_ERROR));
 	ft_strlcpy(export, "PWD=", 5);
 	ft_strlcat(export, ndir, ft_strlen(ndir) + ft_strlen(export) + 1);
-	do_export(export, fd);
+	do_export(export, fd, 0);
 	oldpwd(ndir, export, old, fd);
 	free(export);
 	free(old);

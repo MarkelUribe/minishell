@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:08 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/24 14:57:15 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:17:31 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,17 @@ static void	add_new(char **my_env, char *var)
 }
 
 /* Changes the given env variable to the new value or adds new variable */
-void	do_export(char *var, int fd)
+void	do_export(char *var, int fd, bool *error)
 {
 	char	**my_env;
 	int		i;
 
+	if (blank(var))
+	{
+		*error = true;
+		return ((void)ft_printf
+			("bash: export: %s: not a valid identifier\n", var));
+	}
 	my_env = split_cpy(my_envp(READ, NULL));
 	if (!var)
 		return (split_free(my_env), built_env(fd));
@@ -81,8 +87,7 @@ void	do_export(char *var, int fd)
 		if (!my_env[i])
 			return (split_free(my_env), (void)status(MALLOC_ERROR));
 		ft_strlcpy(my_env[i], var, ft_strlen(var) + 1);
-		my_envp(EDIT, my_env);
-		return ;
+		return ((void)my_envp(EDIT, my_env));
 	}
 	add_new(my_env, var);
 }
@@ -90,12 +95,17 @@ void	do_export(char *var, int fd)
 /* Loops all the export variables entered and exports them */
 void	built_export(t_tokens *token, int fd)
 {
-	int	i;
+	int		i;
+	bool	error;
 
+	error = false;
 	if (!token[0].cmd[1])
 		built_env(fd);
 	i = 0;
 	while (token[0].cmd[++i])
-		do_export(token[0].cmd[i], fd);
-	status(0);
+		do_export(token[0].cmd[i], fd, &error);
+	if (error)
+		status(1);
+	else
+		status(0);
 }

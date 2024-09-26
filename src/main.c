@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/25 18:20:19 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:56:29 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,21 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	status(0);
 	my_envp(EDIT, split_cpy(envp));
-	line = ft_strdup("");
+	line = ft_strdup(" ");
 	using_history();
 	welcome_message(envp);
-	while (line && status(-1) != EXIT_STATUS)
+	while (line)
 	{
 		free(line);
 		init_signals(0);
 		line = readline("\x1b[33mmini_fuet$>\033[0m ");
 		if (line && !blank(line))
-			michel(line);
+			if (michel(line))
+				return (my_envp(FREE, 0), free(line), status(-1));
 	}
 	my_envp(FREE, 0);
 	if (line)
 		free(line);
 	ft_printf("exit\n");
-	return (0);
+	return (status(-1));
 }
