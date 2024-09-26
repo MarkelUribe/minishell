@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 10:51:05 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/26 12:56:29 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:29:33 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_ctrl_c;
 
 static void	welcome_message(char **envp)
 {
@@ -43,6 +45,7 @@ int	main(int argc, char **argv, char **envp)
 	welcome_message(envp);
 	while (line)
 	{
+		g_ctrl_c = 0;
 		free(line);
 		init_signals(0);
 		line = readline("\x1b[33mmini_fuet$>\033[0m ");
