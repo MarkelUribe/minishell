@@ -6,7 +6,7 @@
 #    By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 15:45:23 by muribe-l          #+#    #+#              #
-#    Updated: 2024/09/26 12:37:55 by muribe-l         ###   ########.fr        #
+#    Updated: 2024/09/26 16:01:45 by muribe-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFT_LIB = src/libft/
 LIBFT_FLAGS = -L src/libft/ -lft
 CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=leak
 LDFLAGS = -lreadline -L /opt/homebrew/opt/readline/lib
-RM		= rm -f
+RM		= rm -fr
 
 SRC =	src/mod_split.c \
 		src/first_check.c \
@@ -49,7 +49,7 @@ all: $(NAME)
 
 $(ODIR):
 		mkdir -p $(ODIR)
-		find src -type d -exec mkdir -p $(ODIR)/{} \;
+		mkdir -p $(ODIR)/builtins
 
 $(ODIR)/%.o: src/%.c | $(ODIR)
 	mkdir -p $(dir $@)
@@ -64,6 +64,7 @@ clean:
 
 fclean:	clean
 		$(RM) $(NAME)
+		$(RM) $(ODIR)
 		@make -C $(LIBFT_LIB) fclean
 
 re:		fclean all
