@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   michel.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:41:11 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/25 17:15:51 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:35:32 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,19 @@ static int	parsing_and_data(t_data *data)
 	return (n);
 }
 
-void	michel(char *line)
+int	michel(char *line)
 {
+	int		exit_b;
 	t_data	data;
 
+	exit_b = 0;
 	data.pipe_split = mod_split(line, '|');
 	data.tokens = NULL;
 	add_history(line);
 	if (first_check(line))
 		if (parsing_and_data(&data) == 0)
-			execution(data.tokens, split_len(data.pipe_split));
+			exit_b = execution(data.tokens, split_len(data.pipe_split), 0, 0);
 	free_tokens(&data.tokens);
 	split_free(data.pipe_split);
+	return (exit_b);
 }

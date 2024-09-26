@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:24:54 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/25 10:51:20 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:18:08 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int		status(int new);
 char	**my_envp(int mood, char **envp);
 
 //Program
-void	michel(char *line);
+int		michel(char *line);
 int		here_doc(char *limit);
-void	execution(t_tokens *tokens, int n);
+int		execution(t_tokens *tokens, int n, int i, int temp);
 char	*expand(char *line);
 char	**get_cmd(char *line);
 char	*get_path(char *command);
@@ -47,9 +47,10 @@ void	builtin(t_tokens *tokens, int fd);
 void	built_cd(char *dir, int fd);
 void	built_pwd(int fd);
 void	built_export(t_tokens *token, int fd);
-void	do_export(char *var, int fd);
+void	do_export(char *var, int fd, bool *error);
 void	built_env(int fd);
 void	built_echo(t_tokens *token, int fd);
 void	built_unset(t_tokens *token);
+void	built_exit(t_tokens *token);
 
 #endif //MINISHELL_H

@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:38:04 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/09/25 12:12:24 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:35:52 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "minishell.h"
 
 #include "minishell.h"
 
@@ -64,15 +62,13 @@ static void	wait_childs_to_come_back_from_vietnam(int *pid, int i, int stat)
 	wait_childs_to_come_back_from_vietnam(&pid[1], i - 1, 0);
 }
 
-void	execution(t_tokens *tokens, int n)
+int	execution(t_tokens *tokens, int n, int i, int temp)
 {
-	int	i;
 	int	*pid;
-	int	temp;
 	int	fd[2];
 
 	if (!tokens->cmd[0] || !tokens->cmd[0][0])
-		return ((void)status(0));
+		return (status(0), 0);
 	pid = (int *)malloc(n * sizeof(int));
 	i = -1;
 	temp = 0;
@@ -87,8 +83,10 @@ void	execution(t_tokens *tokens, int n)
 			temp = fd[0];
 		else
 			close(fd[0]);
+		if (!ft_strcmp(tokens->cmd[0], "exit"))
+			return (free(pid), 1);
 		tokens = tokens->next;
 	}
 	wait_childs_to_come_back_from_vietnam(pid, i + 1, 0);
-	free(pid);
+	return (free(pid), 0);
 }

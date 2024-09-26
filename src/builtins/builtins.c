@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 17:39:27 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/23 15:51:52 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:49:45 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	builtin(t_tokens *tokens, int fd)
 	else if (ft_strcmp(tokens[0].cmd[0], "unset") == 0)
 		return (built_unset(tokens));
 	else if (ft_strcmp(tokens[0].cmd[0], "exit") == 0)
-		return ((void)status(EXIT_STATUS));
+		return (built_exit(tokens));
 	return ;
 }

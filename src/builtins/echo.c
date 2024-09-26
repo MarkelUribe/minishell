@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:34:59 by muribe-l          #+#    #+#             */
-/*   Updated: 2024/09/23 16:08:44 by muribe-l         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:25:36 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	built_echo(t_tokens *token, int fd)
 	if (!token[0].cmd[1])
 	{
 		ft_dprintf(fd, "\n");
-		return ;
+		return ((void)status(0));
 	}
 	if (!ft_strcmp(token[0].cmd[1], "-n"))
 		print_params(token, 1, fd);
